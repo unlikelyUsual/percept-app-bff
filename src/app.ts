@@ -3,6 +3,7 @@ import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 import { getEnv } from "./config/env";
 import { geminiRouter } from "./routes/gemini";
+import { userRouter } from "./routes/users";
 
 export const app = new Hono();
 const env = getEnv();
@@ -15,3 +16,4 @@ app.get("/health", (c) => {
 });
 
 app.route("/api/v1/gemini", geminiRouter);
+app.route("/api/v1/users", userRouter);

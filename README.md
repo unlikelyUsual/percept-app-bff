@@ -20,10 +20,39 @@ cp .env.example .env
 
 Set your Gemini API key in .env before running the server.
 
+## Database setup
+
+```bash
+docker compose up -d
+bun install
+psql "postgresql://postgres:postgres@localhost:5432/percept" -f prisma.sql
+```
+
 ## Run
 
 ```bash
 bun run dev
+```
+
+## Auth endpoints
+
+- POST /api/v1/users/signup
+- POST /api/v1/users/login
+
+Example signup request:
+
+```bash
+curl -X POST http://localhost:3000/api/v1/users/signup \
+  -H "Content-Type: application/json" \
+  -d '{"email":"user@example.com","password":"password123"}'
+```
+
+Example login request:
+
+```bash
+curl -X POST http://localhost:3000/api/v1/users/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"user@example.com","password":"password123"}'
 ```
 
 ## Example request

@@ -34,7 +34,10 @@ export const generateGeminiText = async (c: Context) => {
   });
 
   if (!response.ok) {
-    return c.json({ error: "Gemini request failed" }, response.status);
+    return new Response(JSON.stringify({ error: "Gemini request failed" }), {
+      status: response.status,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
   const data = (await response.json()) as {

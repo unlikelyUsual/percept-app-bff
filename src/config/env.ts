@@ -12,6 +12,12 @@ const envSchema = z.object({
     .default(
       "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
     ),
+  PG_HOST: z.string().default("localhost"),
+  PG_PORT: z.coerce.number().int().positive().default(5432),
+  PG_USER: z.string().default("postgres"),
+  PG_PASSWORD: z.string().default("postgres"),
+  PG_DATABASE: z.string().default("percept"),
+  JWT_SECRET: z.string().min(1).default("change-me-in-production"),
 });
 
 export const getEnv = () => envSchema.parse(process.env);
